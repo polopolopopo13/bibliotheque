@@ -12,13 +12,17 @@ class Livre {
 
 var list_livres = new Array({"title":"Dessiner un mouton", "author":"E. St. Berger"}, {"title": "Marche à l'ombre","author": "Sauron"}, {"title": "Mille et une pattes","author": "Freudon"});
 var n_livres = list_livres.length;
-
 var bibliotheque = new Array();
+var ul_listing = document.getElementById("list-of-books");
+
+list_livres.forEach(book=>{
+	ul_listing.innerHTML+="<li>" + book.title +"</li>";});
 
 var btn_register = document.getElementById("btn_register");
 var book_listing = document.getElementById("allBiblio");
 book_listing.textContent = "Books listing\n\n";
 
+//ADD PREVIOUS LIST TO BIBLIOTHEQUE
 for(let i=0; i<= n_livres-1; i++){
 	let author = list_livres[i].author;
 	let title = list_livres[i].title;
@@ -29,20 +33,21 @@ for(let i=0; i<= n_livres-1; i++){
 
 }
 
+//ADD BOOK TO BIBLIOTHEQUE VIA FORMULAR
+
 btn_register.addEventListener("click", addToLibrary);
 function addToLibrary(){
 	var title_input = document.getElementById("title").value;
 	var author_input = document.getElementById("author").value;
-	
-	bibliotheque.push(new Livre(title_input, author_input));
+	var book = new Livre(title_input, author_input);
+	bibliotheque.push(book);
 	reference+=1;
 
 	book_listing.textContent += (title_input + " de " + author_input + '\n');
+	actualiseLibrary(book);
 }
 
-// var btn_sorter = document.querySelectorAll('input[name="sorter"]');
-
-// btn_sorter.addEventListener("change", listSort);
+// SORTING BIBLIOTHEQUE
 
 var btn_sorter = document.querySelectorAll('input[type=radio][name="sorter"]');
 btn_sorter.forEach(radio => radio.addEventListener('change', () => listSort(radio.value)));
@@ -57,3 +62,8 @@ function listSort(sort_by){
 	}
 	console.log(bibliotheque)
 }
+
+// MAKE HTML FOR EACH BOOK and add to div list
+function actualiseLibrary(book){
+	ul_listing.innerHTML+="<li>" + book.title +"</li>";
+};
