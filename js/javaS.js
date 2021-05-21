@@ -3,14 +3,14 @@
 var reference = 0;
 
 class Livre {
-	constructor(titre, auteur, reference) {
-	  this.titre = titre;
-	  this.auteur = auteur;
+	constructor(title, author, reference) {
+	  this.title = title;
+	  this.author = author;
 	  this.reference = reference;
 	}
   }
 
-var list_livres = new Array({"titre":"Dessiner un mouton", "auteur":"E. St. Berger"}, {"titre": "Marche à l'ombre","auteur": "Sauron"}, {"titre": "Mille et une pattes","auteur": "Freudon"});
+var list_livres = new Array({"title":"Dessiner un mouton", "author":"E. St. Berger"}, {"title": "Marche à l'ombre","author": "Sauron"}, {"title": "Mille et une pattes","author": "Freudon"});
 var n_livres = list_livres.length;
 
 var bibliotheque = new Array();
@@ -20,8 +20,8 @@ var book_listing = document.getElementById("allBiblio");
 book_listing.textContent = "Books listing\n\n";
 
 for(let i=0; i<= n_livres-1; i++){
-	let author = list_livres[i].auteur;
-	let title = list_livres[i].titre;
+	let author = list_livres[i].author;
+	let title = list_livres[i].title;
 
 	bibliotheque.push(new Livre(title, author, reference+1))
 	reference ++;
@@ -38,5 +38,22 @@ function addToLibrary(){
 	reference+=1;
 
 	book_listing.textContent += (title_input + " de " + author_input + '\n');
+}
+
+// var btn_sorter = document.querySelectorAll('input[name="sorter"]');
+
+// btn_sorter.addEventListener("change", listSort);
+
+var btn_sorter = document.querySelectorAll('input[type=radio][name="sorter"]');
+btn_sorter.forEach(radio => radio.addEventListener('change', () => listSort(radio.value)));
+
+function listSort(sort_by){
+	console.log(sort_by);
+	if(sort_by=="0"){
+		bibliotheque.sort((a, b) => (a.author > b.author) ? 1 : -1);
+	}
+	else if(sort_by=="1"){
+		bibliotheque.sort((a, b) => (a.title > b.title) ? 1 : -1)
+	}
 	console.log(bibliotheque)
 }
