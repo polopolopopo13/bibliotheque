@@ -15,12 +15,19 @@ var n_livres = list_livres.length;
 
 var bibliotheque = new Array();
 
-for(let i=0; i<= n_livres-1; i++){
-	bibliotheque.push(new Livre(list_livres[i].titre, list_livres[i].auteur, reference+1))
-	reference ++;
-}
-
 var btn_register = document.getElementById("btn_register");
+var book_listing = document.getElementById("allBiblio");
+book_listing.textContent = "Books listing\n\n";
+
+for(let i=0; i<= n_livres-1; i++){
+	let author = list_livres[i].auteur;
+	let title = list_livres[i].titre;
+
+	bibliotheque.push(new Livre(title, author, reference+1))
+	reference ++;
+	book_listing.textContent += (title + " de " + author + '\n');
+
+}
 
 btn_register.addEventListener("click", addToLibrary);
 function addToLibrary(){
@@ -30,5 +37,6 @@ function addToLibrary(){
 	bibliotheque.push(new Livre(title_input, author_input));
 	reference+=1;
 
+	book_listing.textContent += (title_input + " de " + author_input + '\n');
 	console.log(bibliotheque)
 }
