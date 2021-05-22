@@ -23,7 +23,7 @@ class Bibliotheque{
 		ul_listing.innerHTML+="<li>" + book.title +"</li>";
 	};
 
-	addBook(author, title){
+	addBook(title,author){
 		var book = new Livre(title, author, this.length);
 		this.books.push(book);
 		this.refreshHtml(book);
