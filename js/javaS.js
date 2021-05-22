@@ -15,7 +15,7 @@ class Bibliotheque{
 	constructor(gender) {
 		this.gender = gender;
 		this.books = new Array();
-		this.length = 0;
+		this.length = 0;//is also the books reference
 	};
 
 	refreshHtml(book){
@@ -23,7 +23,7 @@ class Bibliotheque{
 		ul_listing.innerHTML+="<li>" + book.title +"</li>";
 	};
 
-	addBook(title,author){
+	addBook(title, author){
 		var book = new Livre(title, author, this.length);
 		this.books.push(book);
 		this.refreshHtml(book);
@@ -33,14 +33,13 @@ class Bibliotheque{
 	sortBooks(sort_by){
 		ul_listing.innerHTML="";
 		book_listing.textContent="";
-		if(sort_by=="0"){
-			this.books.sort((a, b) => (a.author > b.author) ? 1 : -1);
-		}
-		else if(sort_by=="1"){
-			this.books.sort((a, b) => (a.title > b.title) ? 1 : -1)
-		}
-		else if(sort_by=="2"){
-			this.books.sort((a, b) => (a.reference > b.reference) ? 1 : -1)
+		switch(sort_by){
+			case "0" : this.books.sort((a, b) => (a.author > b.author) ? 1 : -1); 
+				break;
+			case "1" : this.books.sort((a, b) => (a.title > b.title) ? 1 : -1); 
+				break;
+			case "2" : this.books.sort((a, b) => (a.reference > b.reference) ? 1 : -1); 
+				break;
 		}
 		this.books.forEach(book => this.refreshHtml(book));
 	}
@@ -70,6 +69,7 @@ btnRegister.addEventListener("click", addToLibrary);
 function addToLibrary(){
 	var title_input = document.getElementById("title").value;
 	var author_input = document.getElementById("author").value;
+	console.log(title_input);
 	Bibliotheque1.addBook(title_input, author_input);
 }
 
