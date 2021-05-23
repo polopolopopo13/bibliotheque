@@ -47,20 +47,20 @@ function caseEngineering(string){
 }
 
 
-// function triDicho(liste_, sorter){
-// 	var len = liste_.length;
-// 	for(let i=1; i<len; i++){
-// 		var elem = liste_[i];
-// 		var j = i-1
+function triDicho(liste_, sorter){
+	var len = liste_.length;
+	for(let i=1; i<len; i++){
+		var elem = liste_[i];
+		var j = i-1
 		
-// 		while(j>=0 && elem[sorter]<liste_[j][sorter]){
-// 			liste_[j+1] = liste_[j]
-// 			j = j-1;
-// 		}
-// 		liste_[j+1]=elem;
-// 	}
-// 	return liste_;
-// }
+		while(j>=0 && elem[sorter]<liste_[j][sorter]){
+			liste_[j+1] = liste_[j]
+			j = j-1;
+		}
+		liste_[j+1]=elem;
+	}
+	return liste_;
+}
 
 
 var Bibliotheque1 = new Bibliotheque();
